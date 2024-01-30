@@ -114,6 +114,7 @@ public:
     // return a wind estimation vector, in m/s; returns 0,0,0 on failure
     bool wind_estimate(Vector3f &wind) const;
 
+    float fs_wind_speed_mag() { return sqrtf(state.wind_estimate * state.wind_estimate);}
     // Determine how aligned heading_deg is with the wind. Return result
     // is 1.0 when perfectly aligned heading into wind, -1 when perfectly
     // aligned with-wind, and zero when perfect cross-wind. There is no

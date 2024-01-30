@@ -195,6 +195,7 @@ public:
 
         // 97: RSSI
         k_param_rssi = 97,
+        k_param_fs_wind_speed = 98,
                 
         //
         // 100: Inertial Nav
@@ -229,6 +230,7 @@ public:
         k_param_gcs4,
         k_param_gcs5,
         k_param_gcs6,
+        // k_param_dgca_uin,            // dgca UIN
 
         //
         // 135 : reserved for Solo until features merged with master
@@ -461,6 +463,7 @@ public:
     AP_Int8         fs_ekf_action;
     AP_Int8         fs_crash_check;
     AP_Float        fs_ekf_thresh;
+    AP_Int16        fs_wind_speed;      //critical wind speed beyond which FS will be triggered and mode will switch to RTL 
     AP_Int16        gcs_pid_mask;
 
 #if MODE_THROW_ENABLED == ENABLED

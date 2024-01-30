@@ -404,6 +404,14 @@ const AP_Param::Info Copter::var_info[] = {
     // @User: Advanced
     GSCALAR(fs_crash_check, "FS_CRASH_CHECK",    1),
 
+    // @Param: FS_WIND_SPEED
+    // @DisplayName: Wind Speed FS: Set to Critical Windspeed in m/s or Set to 0 to disable.
+    // @Description: Critical wind speed beyond which FS will be triggered and mode will switch to RTL 
+    // @Units: m/s
+    // @Range: 0 - 1000
+    // @User: Advanced
+    GSCALAR(fs_wind_speed, "FS_WIND_SPEED", 10),
+
     // @Param: RC_SPEED
     // @DisplayName: ESC Update Speed
     // @Description: This is the speed in Hertz that your ESCs will receive updates

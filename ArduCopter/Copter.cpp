@@ -226,6 +226,8 @@ const AP_Scheduler::Task Copter::scheduler_tasks[] = {
 #if HAL_ADSB_ENABLED
     SCHED_TASK(avoidance_adsb_update, 10,    100, 138),
 #endif
+    // CRITICAL WIND SPEED FS
+    // SCHED_TASK(wind_fs_check, 10, 100, 140),
 #if ADVANCED_FAILSAFE == ENABLED
     SCHED_TASK(afs_fs_check,          10,    100, 141),
 #endif
@@ -622,6 +624,8 @@ void Copter::three_hz_loop()
     // check for deadreckoning failsafe
     failsafe_deadreckon_check();
 
+    // check for critical wind speed
+    failsafe_wind_check();
 #if AP_FENCE_ENABLED
     // check if we have breached a fence
     fence_check();

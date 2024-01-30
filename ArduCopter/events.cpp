@@ -1,5 +1,6 @@
 #include "Copter.h"
-
+#include <iostream>
+#include <string.h>
 /*
  *       This event will be called when the failsafe changes
  *       boolean failsafe reflects the current state
@@ -238,6 +239,47 @@ void Copter::failsafe_gcs_off_event(void)
     gcs().send_text(MAV_SEVERITY_WARNING, "GCS Failsafe Cleared");
     AP::logger().Write_Error(LogErrorSubsystem::FAILSAFE_GCS, LogErrorCode::FAILSAFE_RESOLVED);
 }
+
+
+// executes wind failsafe if speed more than critical
+void Copter::failsafe_wind_check()
+{
+    // Vector3f windV;
+    // windV = AP::ahrs().wind_estimate();
+    // std::cout<<windV.x<<"\t"<<windV.y<<"\n";
+    bool trigger = ((AP::ahrs().fs_wind_speed_mag() > g.fs_wind_speed) && g.fs_wind_speed != 0);
+    // bool trigger = (AP::ahrs().fs_wind_speed_mag() > 10);
+    // AP::logger().Write_Message("trigger set");
+    
+    // check for clearing of event
+    if (trigger != failsafe.wind) {
+        if (trigger) {
+            failsafe_wind_on_event();
+        } else {
+            AP::logger().Write_Error(LogErrorSubsystem::FAILSAFE_WIND, LogErrorCode::ERROR_RESOLVED);
+            failsafe.wind = false;
+        }
+    }
+}
+
+// wind speed failsafe action
+void Copter::failsafe_wind_on_event()
+{
+    failsafe.wind = true;
+    gcs().send_text(MAV_SEVERITY_CRITICAL,"Failsafe: Wind Speed too high.");
+    AP::logger().Write_Error(LogErrorSubsystem::FAILSAFE_WIND, LogErrorCode::FAILSAFE_OCCURRED);
+
+    if (should_disarm_on_failsafe()) {
+        arming.disarm(AP_Arming::Method::TERRAINFAILSAFE);
+#if MODE_RTL_ENABLED == ENABLED
+    } else if (flightmode->mode_number() == Mode::Number::RTL) {
+        // mode_rtl.restart_without_terrain();
+#endif
+    } else {
+        set_mode_RTL_or_land_with_pause(ModeReason::FAILSAFE);
+    }
+}
+
 
 // executes terrain failsafe if data is missing for longer than a few seconds
 void Copter::failsafe_terrain_check()

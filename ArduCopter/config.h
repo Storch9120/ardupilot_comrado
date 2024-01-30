@@ -135,6 +135,12 @@
 #endif
 
 //////////////////////////////////////////////////////////////////////////////
+//  Critical wind Failsafe
+#ifndef FS_WIND_SPEED_DEFAULT
+ # define FS_WIND_SPEED_DEFAULT      10     // default value for critical wind speed
+#endif
+
+//////////////////////////////////////////////////////////////////////////////
 //  Auto Tuning
 #ifndef AUTOTUNE_ENABLED
  # define AUTOTUNE_ENABLED  ENABLED
