@@ -230,7 +230,8 @@ public:
         k_param_gcs4,
         k_param_gcs5,
         k_param_gcs6,
-        // k_param_dgca_uin,            // dgca UIN
+        k_param_dgca_uin,            // dgca UIN
+        k_param_dgca_pilot_id,
 
         //
         // 135 : reserved for Solo until features merged with master
@@ -458,6 +459,8 @@ public:
     AP_Int8         radio_tuning;
     AP_Int8         frame_type;
     AP_Int8         disarm_delay;
+    AP_Int16        dgca_uin;
+    AP_Int32        dgca_pilot_id;
 
     AP_Int8         land_repositioning;
     AP_Int8         fs_ekf_action;

@@ -53,6 +53,10 @@
 
 //////////////////////////////////////////////////////////////////////////////
 //  DGCA Unique Identification Number
-#ifndef DGCA_UIN
- # define DGCA_UIN      0     // default value for UID
+#ifndef DGCA_UIN_DEFAULT
+ # define DGCA_UIN_DEFAULT      0     // default value for UID
+#endif
+
+#ifndef DGCA_PILOT_ID_DEFAULT
+#define DGCA_PILOT_ID_DEFAULT 12200006
 #endif

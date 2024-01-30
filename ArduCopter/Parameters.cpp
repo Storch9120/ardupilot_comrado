@@ -35,6 +35,20 @@ const AP_Param::Info Copter::var_info[] = {
     // @ReadOnly: True
     GSCALAR(format_version, "FORMAT_VERSION",   0),
 
+    // @Param: DGCA_UIN
+    // @DisplayName: DGCA UIN
+    // @Description: DGCA Unique Identifier Number, Prefix U
+    // @Range: 0 32767
+    // @User: Advanced
+    GSCALAR(dgca_uin, "DGCA_UIN", DGCA_UIN_DEFAULT),
+    
+    // @Param: DGCA_PILOT_ID
+    // @DisplayName: DGCA_PILOT_ID
+    // @Description: DGCA Pilot Identifier Number, Prefix RA
+    // @Range: 0 4294967296
+    // @User: Advanced
+    GSCALAR(dgca_pilot_id, "DGCA_PILOT_ID", DGCA_PILOT_ID_DEFAULT),
+
     // @Param: SYSID_THISMAV
     // @DisplayName: MAVLink system ID of this vehicle
     // @Description: Allows setting an individual MAVLink system id for this vehicle to distinguish it from others on the same network
